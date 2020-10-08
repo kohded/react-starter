@@ -1,6 +1,18 @@
 .container {
-  background-color: @color-primary;
-  max-width: @max-width;
-  padding: 1rem;
-  width: 100%;
+  margin: auto;
 }
+
+.media-breakpoint(@minWidth, @breakpoint) {
+  @media (min-width: @minWidth) {
+    .container {
+      max-width: @breakpoint;
+    }
+  }
+}
+
+.media-breakpoint(@screen-xs-min, @screen-xs);
+.media-breakpoint(@screen-sm-min, @screen-sm);
+.media-breakpoint(@screen-md-min, @screen-md);
+.media-breakpoint(@screen-lg-min, @screen-lg);
+.media-breakpoint(@screen-xl-min, @screen-xl);
+.media-breakpoint(@screen-xxl-min, @screen-xxl);

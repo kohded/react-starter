@@ -1,6 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-// import classes from './Container.module.less';
-import classes from './Container.module.scss';
+import classes from './Container.module.less';
 
 interface ContainerProps {
   children: React.ReactNode;
