@@ -1,11 +1,22 @@
-import React, { PropsWithChildren } from 'react';
-// import classes from './Container.module.less';
+import React, { FC, PropsWithChildren, ReactNode } from 'react';
+import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
 import classes from './Container.module.scss';
 
 interface ContainerProps {
-  children: React.ReactNode;
+  children: ReactNode;
+  isFullWidth?: boolean;
+  role: string;
 }
 
-export const Container: React.FC<ContainerProps> = ({
+export const Container: FC<ContainerProps> = ({
   children,
-}: PropsWithChildren<ContainerProps>) => <div className={classes.container}>{children}</div>;
+  isFullWidth,
+  role,
+}: PropsWithChildren<ContainerProps>) => (
+  <div
+    className={`${isFullWidth ? classes[`container-full-width`] : classes.container}`}
+    role={role}
+  >
+    <ErrorBoundary>{children}</ErrorBoundary>
+  </div>
+);

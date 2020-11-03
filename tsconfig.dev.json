@@ -1,3 +1,4 @@
+// https://stackoverflow.com/questions/61956555/why-is-typescript-eslint-parser-including-files-outside-of-those-configured-in
 {
-  "include": [".eslintrc.js", "postcss.config.js", "webpack.config.js"]
+  "include": [".eslintrc.js", "postcss.config.js", "webpack.config.babel.js"]
 }

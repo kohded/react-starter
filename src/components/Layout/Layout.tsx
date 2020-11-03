@@ -1,18 +1,22 @@
-import React, { PropsWithChildren } from 'react';
+import React, { FC, PropsWithChildren, ReactNode } from 'react';
 import { Container } from '../Container/Container';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }: PropsWithChildren<LayoutProps>) => (
+export const Layout: FC<LayoutProps> = ({ children }: PropsWithChildren<LayoutProps>) => (
   <>
-    <Header />
-    <main className="wrapper">
-      <Container>{children}</Container>
-    </main>
-    <Footer />
+    <Container isFullWidth role="banner">
+      <Header />
+    </Container>
+    <Container role="main">
+      <main>{children}</main>
+    </Container>
+    <Container isFullWidth role="contentinfo">
+      <Footer />
+    </Container>
   </>
 );

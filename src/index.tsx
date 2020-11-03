@@ -1,7 +1,17 @@
-import React from 'react';
+import { enableAllPlugins } from 'immer';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom';
 import { App } from './components/App/App';
-// import './index.less';
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary';
 import './index.scss';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+enableAllPlugins();
+
+ReactDOM.render(
+  <StrictMode>
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  </StrictMode>,
+  document.getElementById('app')
+);

@@ -1,8 +1,3 @@
-import React from 'react';
-import { Container } from '../Container/Container';
+import React, { FC } from 'react';
 
-export const Footer: React.FC = () => (
-  <footer className="wrapper">
-    <Container>FOOTER</Container>
-  </footer>
-);
+export const Footer: FC = () => <footer>Footer</footer>;
