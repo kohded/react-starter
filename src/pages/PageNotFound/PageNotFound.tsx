@@ -1,3 +1,6 @@
-import React from 'react';
+import { Typography } from 'antd';
+import React, { FC } from 'react';
 
-export const PageNotFound: React.FC = () => <p>404 - Page Not Found</p>;
+const PageNotFound: FC = () => <Typography>404 - Page Not Found</Typography>;
+
+export default PageNotFound;

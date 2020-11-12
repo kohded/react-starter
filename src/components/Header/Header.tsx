@@ -1,9 +1,9 @@
 import { Layout, Typography } from 'antd';
-import React from 'react';
+import React, { FC } from 'react';
 import { Container } from '../Container/Container';
 
-export const Header: React.FC = () => (
-  <Layout.Header>
+export const Header: FC = () => (
+  <Layout.Header role="banner">
     <Container>
       <Typography>Header</Typography>
     </Container>

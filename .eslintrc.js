@@ -24,14 +24,6 @@ module.exports = {
     'prettier/react',
   ],
   ignorePatterns: ['build'],
-  overrides: [
-    {
-      files: ['*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-      },
-    },
-  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: ['./tsconfig.json', './tsconfig.dev.json'],
@@ -39,11 +31,16 @@ module.exports = {
   plugins: ['@typescript-eslint'],
   rules: {
     'import/prefer-default-export': 'off',
+    // Immer - https://github.com/immerjs/immer/issues/189#issuecomment-703083451
+    'no-param-reassign': [
+      'error',
+      { props: true, ignorePropertyModificationsForRegex: ['^draft'] },
+    ],
   },
   settings: {
     'import/resolver': {
       node: {}, // Prevents import/no-extraneous-dependencies for Node api.
-      webpack: { config: 'webpack.config.js' },
+      webpack: { config: 'webpack.config.babel.js' },
     },
   },
 };
