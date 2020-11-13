@@ -5,18 +5,13 @@ import classes from './Container.module.scss';
 interface ContainerProps {
   children: ReactNode;
   isFullWidth?: boolean;
-  role: string;
 }
 
 export const Container: FC<ContainerProps> = ({
   children,
   isFullWidth,
-  role,
 }: PropsWithChildren<ContainerProps>) => (
-  <div
-    className={`${isFullWidth ? classes[`container-full-width`] : classes.container}`}
-    role={role}
-  >
+  <div className={`${isFullWidth ? classes[`container-full-width`] : classes.container}`}>
     <ErrorBoundary>{children}</ErrorBoundary>
   </div>
 );
