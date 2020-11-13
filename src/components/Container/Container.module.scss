@@ -1,12 +1,6 @@
 .container {
-  @extend .container-full-width;
-
-  max-width: $max-width;
-}
-
-.container-full-width {
-  background-color: $color-primary;
   margin: 0 auto;
+  max-width: $max-width;
   padding: $padding;
   width: 100%;
 }
