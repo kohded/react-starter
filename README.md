@@ -2,37 +2,51 @@
 
 React starter application.
 
-## Setup HTTPS
+## Setup Application
 
-- Install [mkcert](https://github.com/FiloSottile/mkcert#installation).
-- Install local CA to trust store. To change local CA you must uninstall first before reinstalling. This does not need to be installed for every application.
+### HTTPS
+
+1. Install [mkcert](https://github.com/FiloSottile/mkcert#installation).
+
+2. Install local CA to available trust stores with the following command.
 
 ```shell script
 mkcert -install
-mkcert -uninstall
 ```
 
-- Run ssl script in [package.json](package.json) to install application certificates.
+3. Optional: Add hosts to OS hosts file and setup:ssl script for additional https domains, defaults only to localhost.
+
+- Windows: C:\Windows\System32\drivers\etc\hosts
+- Mac: /etc/hosts
 
 ```shell script
-npm run ssl
+# hosts
+127.0.0.1 localhost myhost
+
+# package.json
+"setup:ssl": "... localhost myhost",
 ```
 
-Fix Windows Firefox unsupported root store. Using only the first link should work.
+4. Run setup script in [package.json](package.json) to set up husky and ssl certificates. Must generate the ssl certificates for https support.
 
-- [Windows 10: Firefox](https://gist.github.com/cecilemuller/9492b848eb8fe46d462abeb26656c4f8#user-content-windows-10-firefox)
-- [Support for CAroot for Windows Firefox](https://github.com/FiloSottile/mkcert/issues/259)
+```shell script
+npm run setup
+```
 
-## Generate icons and splash screens
+5. When viewing the application in the browser and shows a warning about untrusted certificates, will need to [Trust the local CA](https://gist.github.com/cecilemuller/9492b848eb8fe46d462abeb26656c4f8#trust-the-local-ca).
 
-- Replace ./src/assets/images/icons/logo.svg with your own logo.svg.
+- Warnings: Chrome: "Your connection is not private", Firefox: "Warning: Potential Security Risk Ahead"
+
+### Generate icons and splash screens
+
+- Replace ./src/assets/images/icons/logo.svg with application logo.svg.
 - Run icons script in [package.json](package.json) to generate icons and splash screens. This script uses [pwa-asset-generator](https://github.com/onderceylan/pwa-asset-generator).
 
 ```shell script
 npm run icons
 ```
 
-## Selecting less or scss (default)
+### Selecting less or scss (default)
 
 - Delete less or scss folder.
   - ./src/assets/{less|scss}
@@ -43,3 +57,55 @@ npm run icons
   - ./src/components/Container/Container.tsx
   - ./src/components/Layout/Layout.module.scss
   - ./src/components/Layout/Layout.tsx
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm run build`
+
+Runs webpack to build the app for production into the build folder.
+
+### `npm run format`
+
+Runs prettier on project files.
+
+### `npm run icons`
+
+Runs pwa-asset-generator to generate icons and splash screens for the application.
+
+### `npm run lint`
+
+Runs all other lint scripts together.
+
+### `npm run lint:eslint`
+
+Runs eslint on project files.
+
+### `npm run lint:stylelint`
+
+Runs stylelint on project files.
+
+### `npm run prebuild`
+
+Runs these commands before build script.
+
+### `npm run serve`
+
+Runs serve as https in the build folder.
+
+### `npm run setup`
+
+Runs all other setup scripts together.
+
+### `npm run setup:husky`
+
+Runs husky to install husky hooks and adds pre-commit hook.
+
+### `npm run setup:ssl`
+
+Runs mkcert to generate ssl certificates for https support.
+
+### `npm run start`
+
+Runs webpack in development mode at [https://localhost:8000](http://localhost:3000).

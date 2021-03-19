@@ -1,10 +1,10 @@
+import path from 'path';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import path from 'path';
 import TerserJSPlugin from 'terser-webpack-plugin';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -14,16 +14,23 @@ const pathResolve = (p) => path.resolve(__dirname, p);
 const styleLoaders = (ext) => [
   {
     loader: isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+    ...(isProduction && {
+      options: {
+        // Without this, MiniCssExtractPlugin prepends css path to font path in build.
+        // https://stackoverflow.com/questions/63251134/font-urls-path-is-wrong-and-includes-css-path-after-webpack-build
+        publicPath: '../..',
+      },
+    }),
   },
   {
     loader: 'css-loader',
     options: {
       importLoaders: ext === 'css' ? 1 : 3,
-      sourceMap: true,
       modules: {
         auto: /\.module.(css|less|scss)$/,
         localIdentName: '[name]-[local]-[hash:base64:5]',
       },
+      sourceMap: true,
     },
   },
   {
@@ -64,29 +71,41 @@ module.exports = {
         test: /\.(js|ts)x?$/,
       },
       {
-        test: /\.(bmp|gif|ico|jpe?g|png|svg|webp)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[ext]',
-              outputPath: pathResolve('assets/images'),
-            },
-          },
-          {
-            loader: 'image-webpack-loader',
-          },
-        ],
-      },
-      {
-        test: /\.(docx|pdf|txt)$/,
+        test: /\.(pdf)$/,
         use: [
           {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: pathResolve('assets/docs'),
+              outputPath: 'assets/docs',
             },
+          },
+        ],
+      },
+      {
+        test: /\.(ttf)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/fonts',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(gif|jpe?g|png|svg|webp)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/images',
+            },
+          },
+          {
+            loader: 'image-webpack-loader',
           },
         ],
       },
@@ -149,7 +168,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          context: pathResolve('src/assets/build'),
+          context: pathResolve('src/assets/static'),
           from: '*',
         },
         {

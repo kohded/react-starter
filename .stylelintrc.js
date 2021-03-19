@@ -1,30 +1,27 @@
 module.exports = {
-  extends: ['stylelint-config-standard', 'stylelint-config-prettier'],
+  extends: [
+    'stylelint-config-standard',
+    // Installs: stylelint-order, stylelint-scss
+    'stylelint-config-sass-guidelines',
+    'stylelint-a11y/recommended',
+    // https://github.com/prettier/stylelint-prettier#user-content-recommended-configuration
+    'stylelint-prettier/recommended',
+  ],
   ignoreFiles: ['build/**'],
-  plugins: ['stylelint-scss', 'stylelint-order'],
+  plugins: [
+    'stylelint-high-performance-animation',
+    'stylelint-declaration-strict-value',
+    'stylelint-no-unsupported-browser-features',
+  ],
   rules: {
-    'at-rule-empty-line-before': [
-      'always',
-      {
-        except: ['first-nested'],
-        ignore: ['after-comment'],
-        ignoreAtRules: ['else', 'import'],
-      },
-    ],
-    'at-rule-no-unknown': null,
-    'block-closing-brace-newline-after': [
-      'always',
-      {
-        ignoreAtRules: ['else', 'if'],
-      },
-    ],
-    'order/properties-alphabetical-order': true,
-    'scss/at-rule-no-unknown': true,
-    'selector-pseudo-class-no-unknown': [
+    'plugin/no-low-performance-animation-properties': true,
+    'plugin/no-unsupported-browser-features': [
       true,
       {
-        ignorePseudoClasses: ['global'],
+        severity: 'warning',
       },
     ],
+    'scale-unlimited/declaration-strict-value': [['color']],
+    'selector-max-id': 1,
   },
 };

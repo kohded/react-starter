@@ -1,6 +1,7 @@
-.container {
-  margin: 0 auto;
-  max-width: $max-width;
+.padding {
   padding: $padding;
-  width: 100%;
+}
+
+.root {
+  max-width: $max-width;
 }

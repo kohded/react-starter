@@ -1,8 +1,3 @@
-declare module '*.bmp' {
-  const image: string;
-  export default image;
-}
-
 declare module '*.gif' {
   const image: string;
   export default image;
@@ -18,9 +13,24 @@ declare module '*.jpeg' {
   export default image;
 }
 
+declare module '*.less' {
+  const styles: { [className: string]: string };
+  export default styles;
+}
+
+declare module '*.pdf' {
+  const image: string;
+  export default image;
+}
+
 declare module '*.png' {
   const image: string;
   export default image;
+}
+
+declare module '*.scss' {
+  const styles: { [className: string]: string };
+  export default styles;
 }
 
 declare module '*.svg' {
@@ -31,14 +41,4 @@ declare module '*.svg' {
 declare module '*.webp' {
   const image: string;
   export default image;
-}
-
-declare module '*.less' {
-  const styles: { [className: string]: string };
-  export default styles;
-}
-
-declare module '*.scss' {
-  const styles: { [className: string]: string };
-  export default styles;
 }
